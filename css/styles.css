@@ -1,0 +1,29 @@
+h2 {
+	color: red;
+}
+.name {
+	color: blue;
+}
+
+.container {
+	width: 960px;
+	height: 600px;
+	max-width: 95%;
+	position: relative;
+	margin: 0 auto;
+	/*background: blue;*/
+}
+
+img {
+	max-width: 100%;
+}
+
+.testimg {
+	border: 1px solid red;
+}
+
+@media (max-width: 600px) {
+  .container {
+    background: red;
+  }
+}
