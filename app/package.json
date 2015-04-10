@@ -1,0 +1,17 @@
+{
+  "name": "sup-zen",
+  "version": "0.0.1",
+  "description": "The Zen app prototype built for the SUP program",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "//": "node-sass is a devDependency; ideally use ruby, but this is here to remind to install it",
+  "devDependencies": {
+    "http-server": "^0.7.3",
+    "jshint": "latest",
+    "nodemon": "^1.2.1"
+  },
+  "scripts": {
+
+  }
+}
