@@ -11,7 +11,8 @@
     "jshint": "latest",
     "nodemon": "^1.2.1"
   },
-  "scripts": {
-
+  "scripts": {},
+  "dependencies": {
+    "normalize.css": "^3.0.3"
   }
 }
