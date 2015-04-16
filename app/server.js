@@ -7,8 +7,9 @@ var port     = process.env.PORT || 8080;
 // configuration ===============================================================
 app.set('view engine', 'ejs'); // set up ejs for templating
 
-// routes ======================================================================
+// routes and API ==============================================================
 require('./routes/routes.js')(app); // load our routes and pass in our app
+require('./routes/api.js')(app);    // load our API
 
 // launch ======================================================================
 app.listen(port);
