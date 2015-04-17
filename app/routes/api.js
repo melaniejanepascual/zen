@@ -62,24 +62,32 @@ module.exports = function(app, url) {
     };
 
     // =====================================
+    // return a function that responds with
+    // JSON or HTML depending on the request
+    // =====================================
+    var responseFormatter = function(templatePath) {
+        return function(req, res) {
+            var accept = req.headers.accept,
+                data   = getData(req);
+
+            if (accept && accept.indexOf('application/json') > -1) {
+                res.writeHead(200, {
+                    'Access-Control-Allow-Origin': '*', // TODO: only allow our domain
+                });
+                res.write(data);
+                res.end();
+            }
+            else {
+                res.render(templatePath, data);
+            }
+        }
+    };
+
+    // =====================================
     // User
     // @param username
     // returns username and some stuff, TBD
     // =====================================
-    app.get('/user', function(req, res) {
-        var accept = req.headers.accept,
-            data   = getData(req);
-
-        if (accept && accept.indexOf('application/json') > -1) {
-            res.writeHead(200, {
-                'Access-Control-Allow-Origin': '*', // TODO: only allow our domain
-            });
-            res.write(data);
-            res.end();
-        }
-        else {
-            res.render('pages/index', data); // TODO: make a profile page tempate
-        }
-    });
+    app.get('/user', responseFormatter('pages/index'));  // TODO: make a profile page tempate
 
 };
