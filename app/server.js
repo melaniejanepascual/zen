@@ -1,6 +1,7 @@
 // set up ======================================================================
 // get all the tools we need
 var express  = require('express');
+var url      = require('url');
 var app      = express();
 var port     = process.env.PORT || 8080;
 
@@ -8,8 +9,8 @@ var port     = process.env.PORT || 8080;
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // routes and API ==============================================================
-require('./routes/routes.js')(app); // load our routes and pass in our app
-require('./routes/api.js')(app);    // load our API
+require('./routes/routes.js')(app);   // load our routes and pass in our app
+require('./routes/api.js')(app, url); // load our API
 
 // launch ======================================================================
 app.listen(port);
