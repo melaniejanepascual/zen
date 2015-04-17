@@ -5,3 +5,12 @@ The Zen prototype app uses node.js
 3. sudo npm install
 4. sudo nodemon server.js
 5. Open a browser to http://localhost:8080
+
+
+Build tools
+-----------
+We use npm as our build tool instead of grunt or gulp, which just call the command line anyway.
+A good discussion of this can be found [here](http://blog.keithcirkel.co.uk/why-we-should-stop-using-grunt/).
+
+All tasks are in package.json.
+Example usage: npm run build:css

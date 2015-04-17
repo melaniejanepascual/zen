@@ -11,7 +11,9 @@
     "jshint": "latest",
     "nodemon": "^1.2.1"
   },
-  "scripts": {},
+  "scripts": {
+    "build:css" : "mkdir -p dist/css && sass css/main.scss dist/css/main.css"
+  },
   "dependencies": {
     "ejs": "^2.3.1",
     "express": "^4.12.3",
