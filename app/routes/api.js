@@ -35,11 +35,22 @@ module.exports = function(app, url) {
     // also serves as the allowed data types
     // =====================================
     var fakeData = {
+        // =====================================
+        // User
+        // @param username
+        // returns username and some stuff, TBD
+        // =====================================
         user: {
             id: 123,
             username: 'bob',
             photoUrl: '//lorempixel.com/300/300/'
         },
+        // =====================================
+        // Quote
+        // returns a random quote
+        // (this is an internal API only -
+        // using AJAX to get the quote is overkill)
+        // =====================================
         quote: {
             text: "If you ain't first, yer last.",
             author: 'Reese Bobby, Talledega Nights'
@@ -78,16 +89,15 @@ module.exports = function(app, url) {
                 res.end();
             }
             else {
+                try {
+                    data = JSON.parse(data);
+                }
+                catch (e) { } // TODO
                 res.render(templatePath, data);
             }
         }
     };
 
-    // =====================================
-    // User
-    // @param username
-    // returns username and some stuff, TBD
-    // =====================================
-    app.get('/user', responseFormatter('pages/index'));  // TODO: make a profile page tempate
+    app.get('/user', responseFormatter('pages/user'));
 
 };
