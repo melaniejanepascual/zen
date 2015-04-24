@@ -12,7 +12,10 @@
     "nodemon": "^1.2.1"
   },
   "scripts": {
-    "build:css" : "mkdir -p dist/css && sass css/main.scss dist/css/main.css"
+    "clean": "rm -r dist",
+    "serve": "sudo nodemon server.js",
+    "prebuild:css": "mkdir -p dist/css",
+    "build:css": "sass --sourcemap=none css/main.scss dist/css/main.css"
   },
   "dependencies": {
     "ejs": "^2.3.1",
