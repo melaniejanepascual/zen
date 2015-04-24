@@ -1,11 +1,4 @@
-/* apply a natural box layout model to all elements, but allowing components to change */
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-img {
-    max-width: 100%;
-}
+@import '_vars';
+@import 'defaults';
+@import 'nav';
+@import 'header';

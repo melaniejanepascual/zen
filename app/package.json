@@ -13,6 +13,7 @@
   },
   "scripts": {
     "clean": "rm -r dist",
+    "preserve": "npm run clean && npm run build:css",
     "serve": "sudo nodemon server.js",
     "prebuild:css": "mkdir -p dist/css",
     "build:css": "sass --sourcemap=none css/main.scss dist/css/main.css"

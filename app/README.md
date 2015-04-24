@@ -13,4 +13,7 @@ We use npm as our build tool instead of grunt or gulp, which just call the comma
 A good discussion of this can be found [here](http://blog.keithcirkel.co.uk/why-we-should-stop-using-grunt/).
 
 All tasks are in package.json.
-Example usage: npm run build:css
+Example usage: npm run serve
+
+You can use the pre- and post- prefixes to schedule tasks that go before and after others.
+Example: "prebuild:css": "npm run clean"
