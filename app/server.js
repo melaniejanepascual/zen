@@ -5,12 +5,27 @@ var url      = require('url');
 var app      = express();
 var port     = process.env.PORT || 8080;
 
+var passport     = require('passport');
+var flash        = require('connect-flash');
+var session      = require('express-session');
+var bodyParser   = require('body-parser');
+var cookieParser = require('cookie-parser');
+
 // configuration ===============================================================
 app.set('view engine', 'ejs'); // set up ejs for templating
 
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); // get information from html forms
+
+// required for passport
+app.use(session({ secret: 'zenappisthebestappeverdontyouthink' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
 // routes and API ==============================================================
 require('./routes/routes.js')(app);   // load our routes and pass in our app
-require('./routes/api.js')(app, url); // load our API
+require('./routes/api.js')(app, passport, url); // load our API
 
 // launch ======================================================================
 app.listen(port);
