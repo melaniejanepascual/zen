@@ -1,0 +1,13 @@
+.zen_zenbar {
+    height: 20px;
+    width: 100%;
+    max-width: 400px;
+    background: $accent_color;
+}
+
+.zen_zenbar-fill {
+    height: 100%;
+    background: $primary_color;
+    -webkit-transition: width 0.5s;
+    transition: width 0.5s;
+}

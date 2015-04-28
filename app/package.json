@@ -13,10 +13,13 @@
   },
   "scripts": {
     "clean": "rm -r dist",
-    "preserve": "npm run clean && npm run build:css",
+    "lint": "jshint **.js",
+    "preserve": "npm run clean && npm run build:css && npm run build:js",
     "serve": "sudo nodemon server.js",
     "prebuild:css": "mkdir -p dist/css",
-    "build:css": "sass --sourcemap=none css/main.scss dist/css/main.css"
+    "build:css": "sass --sourcemap=none css/main.scss dist/css/main.css",
+    "prebuild:js": "mkdir -p dist/js",
+    "build:js": "cp js/main.js dist/js/main.js"
   },
   "dependencies": {
     "ejs": "^2.3.1",

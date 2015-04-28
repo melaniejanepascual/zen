@@ -43,7 +43,8 @@ module.exports = function(app, url) {
         user: {
             id: 123,
             username: 'bob',
-            photoUrl: '//lorempixel.com/300/300/'
+            photoUrl: '//lorempixel.com/300/300/',
+            zenlevel: 85
         },
         // =====================================
         // Quote

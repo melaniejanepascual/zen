@@ -3,6 +3,7 @@ User schema:
    { id: 123,
      username: 'bob',
      photoUrl: 'cdn.zen.com/1234.jpg',
+     zenlevel: 85,
      friends: { ... },
      posts: { ... }
    }
@@ -14,4 +15,5 @@ User schema:
                 <h1><%= username %></h1>
                 <img src="<%= photoUrl %>" />
             </div>
+            <% include ../partials/zenbar %>
 <% include ../partials/footer %>
