@@ -7,7 +7,12 @@
 
 .zen_zenbar-fill {
     height: 100%;
+    width: 0;
     background: $primary_color;
     -webkit-transition: width 0.5s;
     transition: width 0.5s;
 }
+
+/* widths for zen bar, among other things */
+// TODO, think of a better way to do this
+.width-85 { width: 85%; }
