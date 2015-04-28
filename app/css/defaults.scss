@@ -6,6 +6,10 @@ html {
   box-sizing: inherit;
 }
 
+body {
+    color: $text-color;
+}
+
 img {
     max-width: 100%;
 }
