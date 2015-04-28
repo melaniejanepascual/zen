@@ -11,7 +11,7 @@ Also see [this note](http://stackoverflow.com/questions/4090301/root-user-sudo-e
 2. Install sass by following the directions [here](http://sass-lang.com/install).
 3. cd to the zen/app directory
 4. sudo npm install
-5. sudo nodemon server.js
+5. npm run serve
 6. Open a browser to http://localhost:8080
 
 
