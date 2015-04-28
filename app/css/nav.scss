@@ -13,6 +13,12 @@
     z-index: 0;
 }
 
+.zen_navigation ul, .zen_navigation li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 .zen_site-container {
     min-width: 100%;
     min-height: 100%;
