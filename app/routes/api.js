@@ -63,14 +63,18 @@ module.exports = function(app, passport, url) {
     // =====================================
     var getData = function(req) {
         var pathname = url.parse(req.url).pathname.split('/'),
-            dataType = pathname.length && pathname[1]; // only the first part of path, no deep nesting yet
+            dataType = pathname.length && pathname[1], // only the first part of path, no deep nesting yet
+            response = {};
+
+        response.title = dataType;
+        response.user  = fakeData.user; // always need the user
 
         if (dataType in fakeData && fakeData.hasOwnProperty(dataType)) {
             // TODO, actually query the DB with parameters and return asynchronously
-            return JSON.stringify(fakeData[dataType]);
+            response[dataType] = fakeData[dataType];
         }
 
-        return '';
+        return JSON.stringify(response);
     };
 
     // =====================================
