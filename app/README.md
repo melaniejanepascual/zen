@@ -29,4 +29,5 @@ Example: "prebuild:css": "npm run clean"
 
 Resources
 ---------
-[Node authentication](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
+- [Using NPM as a build tool](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/)
+- [Node authentication](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
