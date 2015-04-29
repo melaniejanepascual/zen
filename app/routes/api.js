@@ -47,6 +47,21 @@ module.exports = function(app, passport, url) {
             zenlevel: 85
         },
         // =====================================
+        // Tasks
+        // @param user_id
+        // returns an array of tasks
+        // =====================================
+        tasks: [
+        {
+            id: 456,
+            user_id: 123,
+            type: 'task',
+            datetime: '2015-05-01 00:00:00 PDT',
+            location: 'the schoolyard',
+            notes: 'I like puppies'
+        }
+        ],
+        // =====================================
         // Quote
         // returns a random quote
         // (this is an internal API only -
@@ -104,6 +119,7 @@ module.exports = function(app, passport, url) {
     };
 
     app.get('/user', isLoggedIn, responseFormatter('pages/user'));
+    app.get('/controlcenter', isLoggedIn, responseFormatter('pages/controlcenter'));
 
 };
 

@@ -1,0 +1,25 @@
+<%# TODO: variable checks
+User schema:
+   { id: 123,
+     username: 'bob',
+     photoUrl: 'cdn.zen.com/1234.jpg',
+     zenlevel: 85,
+     friends: { ... },
+     posts: { ... }
+   }
+Task schema:
+   { id: 456,
+     user_id: 123,
+     type: 'task' or 'reminder',
+     datetime: some timestamp,
+     location: 'the schoolyard',
+     notes: 'I like puppies'
+   }
+%>
+
+<% include ../partials/header %>
+        <% include ../partials/page_header %>
+            <div class="zen_control-center">
+                <h1>Control Center</h1>
+            </div>
+<% include ../partials/footer %>
