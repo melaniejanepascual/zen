@@ -1,5 +1,5 @@
 header {
-    margin-left: 100px; //temp
+    margin-left: $menu_icon_offset * 2 + $menu_icon_size; // make room for the menu icon
 }
 
 header h1 {
