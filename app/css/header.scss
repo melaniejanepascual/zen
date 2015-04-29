@@ -1,7 +1,17 @@
-header {
-    margin-left: $menu_icon_offset * 2 + $menu_icon_size; // make room for the menu icon
+.zen_header {
+    background: $accent_color;
+    padding-top: $menu_icon_offset;
+    // make room for the menu icon
+    padding-left: $menu_icon_offset * 2 + $menu_icon_size;
+    min-height: $menu_icon_offset * 2 + $menu_icon_size;
 }
 
-header h1 {
-    margin-top: 0;
+.zen_header h1,
+.zen_header h2 {
+    float: left;
+    margin: 0;
+    padding-left: 1em;
+    height: 32px; // TODO, fix this vertical align hack
+    line-height: 32px;
 }
+
