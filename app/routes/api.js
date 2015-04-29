@@ -82,7 +82,7 @@ module.exports = function(app, passport, url) {
             response = {};
 
         response.title = dataType;
-        response.user  = fakeData.user; // always need the user
+        response.user  = fakeData.user; // always need the user; TODO get userID and other basic info from the session cookie
 
         if (dataType in fakeData && fakeData.hasOwnProperty(dataType)) {
             // TODO, actually query the DB with parameters and return asynchronously
