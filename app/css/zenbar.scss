@@ -11,7 +11,12 @@
     background: $primary_color;
     -webkit-transition: width 0.5s;
     transition: width 0.5s;
+    display: none;
 }
+
+// there are two zen bars, one for no js, so only display one of them
+.js .zen_zenbar-fill,
+noscript .zen_zenbar-fill { display: block; }
 
 /* widths for zen bar, among other things */
 // TODO, think of a better way to do this
