@@ -2,7 +2,7 @@
 
 .zen_navigation {
     list-style: none;
-    background: #fff;
+    background: lighten($accent_color, 20%);
     width: 100%;
     height: 100%;
     position: fixed;
@@ -17,6 +17,11 @@
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+.zen_navigation li {
+    padding: 1em 0.5em;
+    text-transform: uppercase;
 }
 
 .zen_site-container {
