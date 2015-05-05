@@ -22,7 +22,7 @@
     "build:img": "cp -R ./images dist/images",
     "build": "npm run build:css && npm run build:js && npm run build:img",
     "preserve": "npm run clean && npm run build",
-    "serve": "sudo nodemon server.js -e js,ejs,scss"
+    "serve": "sudo nodemon server.js"
   },
   "dependencies": {
     "ejs": "^2.3.1",

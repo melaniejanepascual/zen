@@ -26,6 +26,8 @@ Example usage: npm run serve
 You can use the pre- and post- prefixes to schedule tasks that go before and after others.
 Example: "prebuild:css": "npm run clean"
 
+Note: SCSS files do not yet automatically recompile when changed, so you will need to manually recompile them
+(probably in a separate terminal window).
 
 Resources
 ---------
