@@ -14,14 +14,15 @@
   "scripts": {
     "clean": "rm -rf dist",
     "lint": "jshint **.js",
-    "preserve": "npm run clean && npm run build:css && npm run build:js && npm run build:img",
-    "serve": "sudo nodemon server.js",
     "prebuild:css": "mkdir -p dist/css",
     "build:css": "sass --sourcemap=none css/main.scss dist/css/main.css",
     "prebuild:js": "mkdir -p dist/js",
     "build:js": "cp js/main.js dist/js/main.js",
     "prebuild:img": "mkdir -p dist/images",
-    "build:img": "cp -R ./images dist/images"
+    "build:img": "cp -R ./images dist/images",
+    "build": "npm run build:css && npm run build:js && npm run build:img",
+    "preserve": "npm run clean && npm run build",
+    "serve": "sudo nodemon server.js -e js,ejs,scss"
   },
   "dependencies": {
     "ejs": "^2.3.1",
