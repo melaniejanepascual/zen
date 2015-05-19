@@ -4,30 +4,23 @@ Setup
 The Zen prototype app uses node.js and sass.
 
 Note for Windows users:
-It will probably be helpful to install a command line tool such as [cygwin](https://cygwin.com).
-Also see [this note](http://stackoverflow.com/questions/4090301/root-user-sudo-equivalent-in-cygwin) about running commands as root in Windows.
+Windows 7+ users should use PowerShell which comes pre-installed.
 
 1. Install node.js from [nodejs.org](https://nodejs.org/).
 2. Install sass by following the directions [here](http://sass-lang.com/install).
 3. cd to the zen/app directory
-4. sudo npm install
-5. npm run serve
+4. sudo npm install (note: Windows doesn't have a sudo equivalent, but you can run PowerShell as administrator)
+5. gulp
 6. Open a browser to http://localhost:8080
 
 
 Build tools
 -----------
-We use npm as our build tool instead of grunt or gulp, which just call the command line anyway.
+We use gulp as our build tool. You can create new tasks by editing gulpfile.js.
+
+NOTE: We previously used npm as our build tool instead of grunt or gulp, which just call the command line anyway.
+However, Unix commands do not map well to Windows PowerShell commands, so we use gulp to streamline this process.
 A good discussion of this can be found [here](http://blog.keithcirkel.co.uk/why-we-should-stop-using-grunt/).
-
-All tasks are in package.json.
-Example usage: npm run serve
-
-You can use the pre- and post- prefixes to schedule tasks that go before and after others.
-Example: "prebuild:css": "npm run clean"
-
-Note: SCSS files do not yet automatically recompile when changed, so you will need to manually recompile them
-(probably in a separate terminal window).
 
 Resources
 ---------
