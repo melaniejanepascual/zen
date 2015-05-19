@@ -81,7 +81,7 @@ module.exports = function(app, passport, url) {
             dataType = pathname.length && pathname[1], // only the first part of path, no deep nesting yet
             response = {};
 
-        response.title = dataType;
+        response.title = dataType; // TODO map dataType to a nicely formatted title
         response.user  = fakeData.user; // always need the user; TODO get userID and other basic info from the session cookie
 
         if (dataType in fakeData && fakeData.hasOwnProperty(dataType)) {
