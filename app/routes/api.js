@@ -55,10 +55,20 @@ module.exports = function(app, passport, url) {
         {
             id: 456,
             user_id: 123,
+            title: 'Be Awesome',
             type: 'task',
             datetime: '2015-05-01 00:00:00 PDT',
             location: 'the schoolyard',
             notes: 'I like puppies'
+        },
+        {
+            id: 789,
+            user_id: 123,
+            title: 'Take a nap',
+            type: 'task',
+            datetime: '2015-05-01 12:00:00 PDT',
+            location: 'my bed',
+            notes: 'I like pillows'
         }
         ],
         // =====================================
@@ -83,6 +93,9 @@ module.exports = function(app, passport, url) {
 
         response.title = dataType; // TODO map dataType to a nicely formatted title
         response.user  = fakeData.user; // always need the user; TODO get userID and other basic info from the session cookie
+
+        // hacky
+        if (dataType == 'controlcenter') { dataType = 'tasks'; }
 
         if (dataType in fakeData && fakeData.hasOwnProperty(dataType)) {
             // TODO, actually query the DB with parameters and return asynchronously

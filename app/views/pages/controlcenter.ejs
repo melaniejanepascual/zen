@@ -10,16 +10,34 @@ User schema:
 Task schema:
    { id: 456,
      user_id: 123,
+     title: 'a title',
      type: 'task' or 'reminder',
      datetime: some timestamp,
      location: 'the schoolyard',
      notes: 'I like puppies'
    }
+
+ TODO: drag and drop, delete, new task
 %>
 
 <% include ../partials/header %>
         <% include ../partials/page_header %>
             <div class="zen_control-center">
                 <h1>Control Center</h1>
+
+                <div class="zen_task-summaries">
+                    <ul>
+                        <% tasks.forEach(function(task) { %>
+                            <li class="zen_task-summary">
+                                <h4><%= task.title %></h4>
+                                <div class="zen_task-info">
+                                    <h6><%= task.datetime %></h6>
+                                    <h6><%= task.location %></h6>
+                                    <h6><%= task.type %></h6>
+                                </div>
+                            </li>
+                        <% }); %>
+                    </ul>
+                </div>
             </div>
 <% include ../partials/footer %>
