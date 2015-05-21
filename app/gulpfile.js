@@ -21,12 +21,14 @@ gulp.task('copyimages', function() {
     .pipe(gulp.dest('dist/images'));
 });
 
+gulp.task('build', ['sass', 'copyjs', 'copyimages'], function() { });
+
 gulp.task('watch', function() {
   gulp.watch('css/*.scss', ['sass']);
   gulp.watch('js/*.js', ['copyjs']);
   gulp.watch('images/*', ['copyimages']);
 });
 
-gulp.task('default', ['start', 'watch'], function() {
+gulp.task('default', ['build', 'start', 'watch'], function() {
 
 });
