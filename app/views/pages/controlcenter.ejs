@@ -17,7 +17,7 @@ Task schema:
      notes: 'I like puppies'
    }
 
- TODO: drag and drop, delete, new task
+ TODO: drag and drop, delete, date formatting
 %>
 
 <% include ../partials/header %>
@@ -35,9 +35,12 @@ Task schema:
                                     <h6><%= task.location %></h6>
                                     <h6><%= task.type %></h6>
                                 </div>
+                                <a class="zen_task-edit-link" href="/task/<%= task.id %>">Edit</a>
                             </li>
                         <% }); %>
                     </ul>
                 </div>
+
+                <a href="/task/new">New task</a>
             </div>
 <% include ../partials/footer %>

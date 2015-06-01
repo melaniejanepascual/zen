@@ -69,8 +69,7 @@ module.exports = function(app, passport, url) {
             datetime: '2015-05-01 12:00:00 PDT',
             location: 'my bed',
             notes: 'I like pillows'
-        }
-        ],
+        }],
         // =====================================
         // Quote
         // returns a random quote
@@ -89,6 +88,7 @@ module.exports = function(app, passport, url) {
     var getData = function(req) {
         var pathname = url.parse(req.url).pathname.split('/'),
             dataType = pathname.length && pathname[1], // only the first part of path, no deep nesting yet
+            id       = pathname.length && pathname[2],
             response = {};
 
         response.title = dataType; // TODO map dataType to a nicely formatted title
@@ -96,6 +96,7 @@ module.exports = function(app, passport, url) {
 
         // hacky
         if (dataType == 'controlcenter') { dataType = 'tasks'; }
+        if (dataType == 'task') { response.task = getTask(id); }
 
         if (dataType in fakeData && fakeData.hasOwnProperty(dataType)) {
             // TODO, actually query the DB with parameters and return asynchronously
@@ -104,6 +105,12 @@ module.exports = function(app, passport, url) {
 
         return JSON.stringify(response);
     };
+
+    var getTask = function(id) {
+        for (var i = 0; i < fakeData.tasks.length; i++) {
+            if (fakeData.tasks[i].id == id) { return fakeData.tasks[i]; }
+        }
+    }
 
     // =====================================
     // return a function that responds with
@@ -133,6 +140,7 @@ module.exports = function(app, passport, url) {
 
     app.get('/user', isLoggedIn, responseFormatter('pages/user'));
     app.get('/controlcenter', isLoggedIn, responseFormatter('pages/controlcenter'));
+    app.get('/task/*', isLoggedIn, responseFormatter('pages/task'));
 
 };
 
