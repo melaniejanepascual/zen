@@ -14,20 +14,22 @@ Task schema:
 
 <% include ../partials/header %>
         <% include ../partials/page_header %>
+            <% if (typeof message !== 'undefined') { %>
+                <div class="zen_system-message">
+                    <%= message %>
+                </div>
+            <% } %>
+
             <div class="zen_task-edit">
             <h1>
             <% if (typeof task !== 'undefined') { %>Edit
             <% } else { %>New
             <% } %> task</h1>
-                <div class="zen_task-summary">
-                    <% if (typeof task !== 'undefined') { %>
-                    <h4><%= task.title %></h4>
-                    <div class="zen_task-info">
-                        <h6><%= task.datetime %></h6>
-                        <h6><%= task.location %></h6>
-                        <h6><%= task.type %></h6>
-                    </div>
-                    <% } %>
-                </div>
+                <form class="zen_task-form" method="post" action="/task<% if (typeof task !== 'undefined') { %>/<%= task.id %><% } %>">
+                    <label>Title: <input type="text" name="title" <% if (typeof task !== 'undefined') { %>value="<%= task.title %>"<% } %> /></label>
+                    <br /><label>Type: <input type="text" name="type" <% if (typeof task !== 'undefined') { %>value="<%= task.type %>"<% } %> /></label>
+                    <br />
+                    <button>Submit</button>
+                </form>
             </div>
 <% include ../partials/footer %>

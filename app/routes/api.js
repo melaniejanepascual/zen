@@ -85,17 +85,16 @@ module.exports = function(app, passport, url) {
     // =====================================
     // Data retrieval, query the DB
     // =====================================
-    var getData = function(req) {
+    var getData = function(req, dataType, id) {
         var pathname = url.parse(req.url).pathname.split('/'),
-            dataType = pathname.length && pathname[1], // only the first part of path, no deep nesting yet
-            id       = pathname.length && pathname[2],
+            dataType = dataType || pathname.length && pathname[1], // only the first part of path, no deep nesting yet
+            id       = id || pathname.length && pathname[2],
             response = {};
 
         response.title = dataType; // TODO map dataType to a nicely formatted title
         response.user  = fakeData.user; // always need the user; TODO get userID and other basic info from the session cookie
 
         // hacky
-        if (dataType == 'controlcenter') { dataType = 'tasks'; }
         if (dataType == 'task') { response.task = getTask(id); }
 
         if (dataType in fakeData && fakeData.hasOwnProperty(dataType)) {
@@ -113,13 +112,59 @@ module.exports = function(app, passport, url) {
     }
 
     // =====================================
+    // Data update
+    // =====================================
+    var postData = function(req) {
+        var pathname = url.parse(req.url).pathname.split('/'),
+            dataType = dataType || pathname.length && pathname[1]; // only the first part of path, no deep nesting yet
+
+        // hacky
+        dataName = dataType + 's';
+
+        if (dataName in fakeData && fakeData.hasOwnProperty(dataName)) {
+            // TODO, actually query the DB with parameters and return asynchronously
+            var data = fakeData[dataName]; //should be an array
+            var id   = getNextId(data);
+
+            var newItem = { id: id };
+            for (key in req.body) {
+                if (req.body.hasOwnProperty(key)) {
+                    newItem[key] = req.body[key];
+                }
+            }
+            data.push(newItem);
+        }
+        return newItem;
+    }
+
+    var getNextId = function(arr) {
+        var id = 0;
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i].id > id) { id = arr[i].id; }
+        }
+        id++;
+        return id;
+    }
+
+    // =====================================
     // return a function that responds with
     // JSON or HTML depending on the request
     // =====================================
-    var responseFormatter = function(templatePath) {
+    var responseFormatter = function(templatePath, options) {
+        options = options || {};
         return function(req, res) {
+            // TODO: make this async, or make separate post function
+            if (req.method == 'POST') {
+                var result = postData(req);
+                if (!result) {
+                    options.message = 'Error updating DB!';
+                    return;
+                }
+                options.id = result.id;
+            }
+
             var accept = req.headers.accept,
-                data   = getData(req);
+                data   = getData(req, options.dataType, options.id);
 
             if (accept && accept.indexOf('application/json') > -1) {
                 res.writeHead(200, {
@@ -131,6 +176,7 @@ module.exports = function(app, passport, url) {
             else {
                 try {
                     data = JSON.parse(data);
+                    data.message = options.message;
                 }
                 catch (e) { } // TODO
                 res.render(templatePath, data);
@@ -138,9 +184,12 @@ module.exports = function(app, passport, url) {
         }
     };
 
-    app.get('/user', isLoggedIn, responseFormatter('pages/user'));
-    app.get('/controlcenter', isLoggedIn, responseFormatter('pages/controlcenter'));
-    app.get('/task/*', isLoggedIn, responseFormatter('pages/task'));
+    app.all('*', isLoggedIn);
+    app.get('/user', responseFormatter('pages/user'));
+    app.get('/controlcenter', responseFormatter('pages/controlcenter', {dataType: 'tasks'}));
+    app.route('/task*')
+        .get(responseFormatter('pages/task'))
+        .post(responseFormatter('pages/task', {message: 'Task saved!'}));
 
 };
 
