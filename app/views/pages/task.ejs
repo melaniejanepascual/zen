@@ -1,4 +1,4 @@
-<%# TODO: variable checks
+<%#
 Task schema:
    { id: 456,
      user_id: 123,
@@ -9,7 +9,11 @@ Task schema:
      notes: 'I like puppies'
    }
 
-/task/123 edits task 123
+GET /task/123 gets info on task 123
+POST edits/creates a task
+POST with a delete flag will delete
+
+TODO: split date and time into separate fields in the schema
 %>
 
 <% include ../partials/header %>
@@ -28,6 +32,10 @@ Task schema:
                 <form class="zen_task-form" method="post" action="/task<% if (typeof task !== 'undefined') { %>/<%= task.id %><% } %>">
                     <label>Title: <input type="text" name="title" <% if (typeof task !== 'undefined') { %>value="<%= task.title %>"<% } %> /></label>
                     <br /><label>Type: <input type="text" name="type" <% if (typeof task !== 'undefined') { %>value="<%= task.type %>"<% } %> /></label>
+                    <br /><label>Date and time: <input type="text" name="datetime" <% if (typeof task !== 'undefined') { %>value="<%= task.datetime %>"<% } %> /></label>
+                    <br /><label>Location: <input type="text" name="location" <% if (typeof task !== 'undefined') { %>value="<%= task.location %>"<% } %> /></label>
+                    <br /><label>Notes: <input type="text" name="notes" <% if (typeof task !== 'undefined') { %>value="<%= task.notes %>"<% } %> /></label>
+                    <% if (typeof task !== 'undefined') { %><br /><label>Delete? <input type="checkbox" name="delete" /></label><% } %>
                     <br />
                     <button>Submit</button>
                 </form>
