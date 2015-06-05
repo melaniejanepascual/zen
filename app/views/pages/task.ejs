@@ -30,6 +30,7 @@ TODO: split date and time into separate fields in the schema
             <% } else { %>New
             <% } %> task</h1>
                 <form class="zen_task-form" method="post" action="/task<% if (typeof task !== 'undefined') { %>/<%= task.id %><% } %>">
+                    <% if (typeof task !== 'undefined') { %><input type="hidden" name="id" value="<%= task.id %>"><% } %>
                     <label>Title: <input type="text" name="title" <% if (typeof task !== 'undefined') { %>value="<%= task.title %>"<% } %> /></label>
                     <br /><label>Type: <input type="text" name="type" <% if (typeof task !== 'undefined') { %>value="<%= task.type %>"<% } %> /></label>
                     <br /><label>Date and time: <input type="text" name="datetime" <% if (typeof task !== 'undefined') { %>value="<%= task.datetime %>"<% } %> /></label>

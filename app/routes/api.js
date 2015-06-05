@@ -113,6 +113,8 @@ module.exports = function(app, passport, url) {
 
     // =====================================
     // Data update
+    // Decide whether a POST request is really a POST for a new item, a POST to update, or a DELETE
+    // a DELETE will have a "delete" key in the body
     // =====================================
     var postData = function(req) {
         var pathname = url.parse(req.url).pathname.split('/'),
@@ -124,20 +126,49 @@ module.exports = function(app, passport, url) {
         if (dataName in fakeData && fakeData.hasOwnProperty(dataName)) {
             // TODO, actually query the DB with parameters and return asynchronously
             var data = fakeData[dataName]; //should be an array
-            var id   = getNextId(data);
 
-            var newItem = { id: id };
-            for (key in req.body) {
-                if (req.body.hasOwnProperty(key)) {
-                    newItem[key] = req.body[key];
+            // update or delete
+            if ('id' in req.body) {
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    if (item.id == req.body.id) {
+                        // delete
+                        if ('delete' in req.body) {
+                            data.splice(i, 1);
+                            return { message: 'Task deleted!' }; // just return something with no id
+                        }
+                        // update
+                        else {
+                            for (key in req.body) {
+                                if (req.body.hasOwnProperty(key)) {
+                                    item[key] = req.body[key];
+                                }
+                            }
+                            item.message = 'Task updated!';
+                            return item;
+                        }
+                    }
                 }
             }
-            data.push(newItem);
+            // post new entry
+            else {
+                var id = getNextAvailableId(data);
+                var newItem = { id: id,
+                                message: 'Task created!',
+                                newURL: '/task/' + id };
+                for (key in req.body) {
+                    if (req.body.hasOwnProperty(key)) {
+                        newItem[key] = req.body[key];
+                    }
+                }
+                data.push(newItem);
+                return newItem;
+            }
         }
-        return newItem;
+        return null;
     }
 
-    var getNextId = function(arr) {
+    var getNextAvailableId = function(arr) {
         var id = 0;
         for (var i = 0; i < arr.length; i++) {
             if (arr[i].id > id) { id = arr[i].id; }
@@ -153,18 +184,21 @@ module.exports = function(app, passport, url) {
     var responseFormatter = function(templatePath, options) {
         options = options || {};
         return function(req, res) {
+            var result,
+                redirect;
+
             // TODO: make this async, or make separate post function
             if (req.method == 'POST') {
-                var result = postData(req);
+                result = postData(req);
                 if (!result) {
-                    options.message = 'Error updating DB!';
-                    return;
+                    result = { message: 'Error updating DB!' };
                 }
-                options.id = result.id;
+                // this is super bad design, but we want to redirect if it was a new record
+                redirect = result.newURL;
             }
 
             var accept = req.headers.accept,
-                data   = getData(req, options.dataType, options.id);
+                data   = getData(req, options.dataType, options.id) || {};
 
             if (accept && accept.indexOf('application/json') > -1) {
                 res.writeHead(200, {
@@ -176,10 +210,11 @@ module.exports = function(app, passport, url) {
             else {
                 try {
                     data = JSON.parse(data);
-                    data.message = options.message;
                 }
                 catch (e) { } // TODO
-                res.render(templatePath, data);
+                if (result) { data.message = result.message; }
+                if (redirect) { res.redirect(redirect); } // TODO: show some created msg
+                else { res.render(templatePath, data); }
             }
         }
     };
@@ -189,7 +224,7 @@ module.exports = function(app, passport, url) {
     app.get('/controlcenter', responseFormatter('pages/controlcenter', {dataType: 'tasks'}));
     app.route('/task*')
         .get(responseFormatter('pages/task'))
-        .post(responseFormatter('pages/task', {message: 'Task saved!'}));
+        .post(responseFormatter('pages/task'));
 
 };
 
