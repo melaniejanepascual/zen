@@ -26,6 +26,19 @@
     border-bottom: 1px solid rgba($primary_color, 0.25);
 }
 
+.zen_navigation a {
+    color: $tertiary_color;
+    cursor: pointer;
+}
+
+.zen_navigation a:visited {
+    color: $accent_color;
+}
+
+.zen_navigation a:hover {
+    color: $primary_color;
+}
+
 .zen_site-container {
     min-width: 100%;
     min-height: 100%;

@@ -1,0 +1,21 @@
+<%# TODO: variable checks
+User schema:
+   { id: 123,
+     username: 'bob',
+     photoUrl: 'cdn.zen.com/1234.jpg',
+     zenlevel: 85,
+     friends: { ... },
+     posts: { ... }
+   }
+%>
+
+<% include ../partials/header %>
+        <% include ../partials/nav %>
+        <% include ../partials/page_header %>
+            <div class="zen_user-thumb">
+                <h1><%= user.username %></h1>
+                <img src="<%= user.photoUrl %>" />
+                <% include ../partials/zenbar %>
+            </div>
+            <% include ../partials/feed %>
+<% include ../partials/footer %>

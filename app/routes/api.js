@@ -220,6 +220,19 @@ module.exports = function(app, passport, url) {
     };
 
     app.all('*', isLoggedIn);
+
+    // =====================================
+    // HOME PAGE (with login links) ========
+    // =====================================
+    app.get('/', function(req, res) {
+        res.render('pages/index', { title: 'Zen' });
+    });
+
+    // =====================================
+    // MAIN PAGES  =========================
+    // =====================================
+    app.get('/quote', responseFormatter('pages/quote'));
+    app.get('/home', responseFormatter('pages/home'));
     app.get('/user', responseFormatter('pages/user'));
     app.get('/controlcenter', responseFormatter('pages/controlcenter', {dataType: 'tasks'}));
     app.route('/task*')

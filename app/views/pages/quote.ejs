@@ -1,0 +1,16 @@
+<%#
+Quote schema:
+quote: {
+    text: "If you ain't first, yer last.",
+    author: 'Reese Bobby, Talledega Nights'
+}
+%>
+<% include ../partials/header %>
+            <div class="zen_quote">
+                <h2>Quote of the day:</h2>
+                <h3><%= quote.text %></h3>
+                <h4>- <%= quote.author %></h4>
+            </div>
+
+            <p><a href="/home">Continue</a></p>
+<% include ../partials/footer %>
