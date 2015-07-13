@@ -234,6 +234,7 @@ module.exports = function(app, passport, url) {
     app.get('/quote', responseFormatter('pages/quote'));
     app.get('/home', responseFormatter('pages/home'));
     app.get('/user', responseFormatter('pages/user'));
+    app.get('/rewards', responseFormatter('pages/rewards'));
     app.get('/controlcenter', responseFormatter('pages/controlcenter', {dataType: 'tasks'}));
     app.route('/task*')
         .get(responseFormatter('pages/task'))
