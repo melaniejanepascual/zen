@@ -14,7 +14,7 @@ User schema:
         <% include ../partials/page_header %>
             <div class="zen_user-thumb">
                 <h1><%= user.username %></h1>
-                <img src="<%= user.photoUrl %>" />
+                <img class="zen_user-photo" src="<%= user.photoUrl %>" />
                 <% include ../partials/zenbar %>
             </div>
             <% include ../partials/feed %>
