@@ -1,4 +1,4 @@
-git CSS Conventions and style guide
+CSS Conventions and style guide
 -------------------------------
 
 Naming conventions:

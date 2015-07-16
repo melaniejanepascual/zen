@@ -79,7 +79,32 @@ module.exports = function(app, passport, url) {
         quote: {
             text: "If you ain't first, yer last.",
             author: 'Reese Bobby, Talledega Nights'
-        }
+        },
+        // =====================================
+        // Feed
+        // returns news-feed type data
+        // reformatted from other sources:
+        // tasks, etc
+        // =====================================
+        feed: [
+        {
+            user_id: 1,
+            author: 'Jamie',
+            title: 'New event: scholarship workshop',
+            body: '',
+            datetime: '2015-05-01 12:00:00 PDT',
+            likes: 4,
+            comments: []
+        },
+        {
+            user_id: 2,
+            author: '',
+            title: 'SAT prep',
+            body: '',
+            datetime: '2015-05-02 08:00:00 PDT',
+            likes: 7,
+            comments: []
+        }]
     };
 
     // =====================================

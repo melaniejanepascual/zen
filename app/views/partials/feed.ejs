@@ -8,6 +8,46 @@ User schema:
      posts: { ... }
    }
 Feed schema:
+//hardcoded for demo
    {
+     user_id: 1,
+     author: 'Jamie',
+     title: 'New event: scholarship workshop',
+     body: '',
+     datetime: '2015-05-01 12:00:00 PDT',
+     likes: 4,
+     comments: []
    }
 %>
+
+<div class="zen_feed">
+    <h1>News Feed</h1>
+    <div class="zen_feed-item">
+        <h3>Scholarship workshop</h3>
+        <div class="zen_feed-item-body">
+            <p>Ridgemont High is hosting a scholarship workshop.</p>
+        </div>
+        <div class="zen_feed-item-meta">
+            <h4>Time</h4>
+            <p>May 1, 2015 at 12:00 PM</p>
+        </div>
+        <p><span class="zen_like-count">4</span> likes</p>
+        <div class="zen_feed-comments">
+            No comments.
+        </div>
+    </div>
+    <div class="zen_feed-item">
+        <h3>SAT Prep</h3>
+        <div class="zen_feed-item-body">
+            <p>The community center is providing SAT prep classes.</p>
+        </div>
+        <div class="zen_feed-item-meta">
+            <h4>Time</h4>
+            <p>May 2, 2015 at 4:00 PM</p>
+        </div>
+        <p><span class="zen_like-count">7</span> likes</p>
+        <div class="zen_feed-comments">
+            No comments.
+        </div>
+    </div>
+</div>
